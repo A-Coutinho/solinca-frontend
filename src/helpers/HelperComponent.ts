@@ -1,4 +1,4 @@
-import type { ApiResponseType, DropdownItems, MetaResponseType } from "./customTypes";
+import type { ApiResponseType, DropdownItems, GymClassType, MetaResponseType } from "./customTypes";
 
 export const API_URL = "https://api.antoniocoutinho.pt";
 export const API_ALL = API_URL + "/solinca/all";
@@ -61,4 +61,26 @@ export function getDdlItems(_value: string[], _label: string[], _noSorting?: boo
     }
 
     return _noSorting ? _itemListDDL : _itemListDDL.sort((a, b) => a.label.localeCompare(b.label));
+}
+
+export function getStartTime(timeRange: string) {
+    return timeRange.split(" - ")[0];
+}
+
+export function groupByTime(classes: GymClassType[]) {
+    const map: Record<string, any[]> = {};
+
+    classes.forEach((c) => {
+        const start = getStartTime(c.time);
+
+        if (!map[start]) {
+            map[start] = [];
+        }
+
+        map[start].push(c);
+    });
+
+    return Object.keys(map)
+        .sort((a, b) => a.localeCompare(b))
+        .map((time) => ({ time, items: map[time] }));
 }

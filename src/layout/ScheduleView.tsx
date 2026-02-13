@@ -1,4 +1,4 @@
-import { CalendarComponent } from "../components/CalendarComponent";
+import { CalendarComponentNew } from "../components/CalendarComponentNew";
 import type { ApiResponseType } from "../helpers/customTypes";
 
 type ScheduleViewProps = {
@@ -16,5 +16,5 @@ export function ScheduleView({ apiResponse, afterworkResponse, afterworkSelected
 
     if (!activeResponse?.classes) return null;
 
-    return <CalendarComponent apiresponse={activeResponse} classSelected={classSelected} gymSelected={gymSelected} daySelected={daySelected} />;
+    return <CalendarComponentNew apiresponse={activeResponse} classSelected={classSelected} gymSelected={gymSelected} daySelected={daySelected} />;
 }
