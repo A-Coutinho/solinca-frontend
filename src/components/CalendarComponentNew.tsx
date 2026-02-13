@@ -5,8 +5,8 @@ import { GymClassComponent } from "./GymClassComponent";
 
 interface Props {
     apiresponse: ApiResponseType;
-    gymSelected?: string;
-    classSelected?: string;
+    gymSelected?: string[];
+    classSelected?: string[];
     daySelected?: string;
 }
 
@@ -77,9 +77,9 @@ export const CalendarComponentNew: React.FC<Props> = ({ apiresponse, classSelect
     function getClassesForDay(_day: string) {
         let output = apiresponse.classes.filter((c) => c.day === _day);
 
-        if (classSelected && classSelected !== "0") output = output.filter((c) => c.name === classSelected);
+        if (classSelected && classSelected.length > 0) output = output.filter((c) => classSelected.includes(c.name));
 
-        if (gymSelected && gymSelected !== "0") output = output.filter((c) => c.gym === gymSelected);
+        if (gymSelected && gymSelected.length > 0) output = output.filter((c) => gymSelected.includes(c.gym));
 
         return output;
     }

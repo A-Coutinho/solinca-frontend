@@ -1,73 +1,150 @@
-# React + TypeScript + Vite
+# 🏋️ Solinca Schedule Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A clean, filterable weekly class schedule viewer for Solinca gyms.
 
-Currently, two official plugins are available:
+This project extracts, normalizes and displays gym class schedules in a structured, developer-friendly way — with smarter filtering and time-based logic (like afterwork detection).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Live version: https://solinca.antoniocoutinho.pt/
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Why This Exists
 
-## Expanding the ESLint configuration
+The official Solinca schedule is difficult to:
+- Compare across gyms
+- Filter by time range
+- Quickly identify afterwork classes
+- Visualize weekly availability
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+This app solves that by:
+- Structuring raw schedule data
+- Adding custom time-based logic
+- Presenting a clean weekly + daily view
+- Making filtering instant and intuitive
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🧠 Architecture
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Frontend and backend are fully decoupled.
+
+### Backend
+- Python
+- FastAPI
+- Custom scraper
+- Schedule normalization logic
+- Time-based tagging (afterwork, etc.)
+- Self-hosted server
+
+The backend handles:
+- Fetching raw class data
+- Parsing & structuring schedules
+- Adding computed flags
+- Returning clean JSON
+
+### Frontend
+- React
+- Responsive weekly grid (desktop)
+- Daily list view (mobile)
+- Multi-filter support (day, gym, class type)
+- 20H toggle
+- Dynamic filtering without reload
+
+---
+
+## 📊 Core Features
+
+- 📅 Weekly timetable layout
+- 📱 Mobile-friendly daily list
+- 🔎 Multi-filter dropdowns
+- 🕒 20H time format toggle
+- 🏷 Afterwork logic detection
+- 🏢 Multi-gym support
+- ⚡ Fast client-side filtering
+
+---
+
+## 🏗 Data Model (Simplified)
+
+Each class entry contains:
+
+```json
+{
+  "name": "Les Mills Body Combat",
+  "gym": "Gaia",
+  "day": "Monday",
+  "start_time": "06:45",
+  "end_time": "07:30",
+  "studio": "Estúdio 1",
+  "afterwork": false
+}
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The frontend consumes structured data only — no scraping logic exists in the client.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🎯 Design Goals
+
+- Clean visual hierarchy
+- Fast scanning of time blocks
+- Minimal visual noise
+- Emphasis on time first
+- Clear separation between data and presentation
+
+---
+
+## 🚀 Running Locally
+
+### 1️⃣ Clone
+
+```bash
+git clone https://github.com/<your-username>/<repo-name>.git
+cd <repo-name>
 ```
+
+### 2️⃣ Install
+
+```bash
+npm install
+```
+
+### 3️⃣ Start
+
+```bash
+npm start
+```
+
+Make sure the backend API is running and accessible.
+
+---
+
+## 🔮 Future Improvements
+
+- Class type color-coding
+- Favorites / bookmarking
+- Time-based grouping (Morning / Afterwork / Evening)
+- Calendar (.ics) export
+- Occupancy prediction
+- UI polish iteration
+
+---
+
+## 📌 Status
+
+Backend logic: Stable  
+Frontend: Functional, iterative visual refinement ongoing  
+
+---
+
+## ⚠️ Disclaimer
+
+This project is unofficial and not affiliated with Solinca.
+It is a personal project built for learning, experimentation, and improving schedule usability.
+
+---
+
+## 👨‍💻 Author
+
+Built and maintained by António Coutinho  
+Portfolio: https://antoniocoutinho.pt/

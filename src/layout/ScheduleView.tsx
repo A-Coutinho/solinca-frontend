@@ -6,8 +6,8 @@ type ScheduleViewProps = {
     afterworkResponse?: ApiResponseType;
     afterworkSelected: boolean;
 
-    classSelected: string;
-    gymSelected: string;
+    classSelected: string[];
+    gymSelected: string[];
     daySelected: string;
 };
 

@@ -3,8 +3,9 @@ import { getDdlItems } from "../helpers/HelperComponent";
 import { DAYS, MediaSize, type MetaResponseType } from "../helpers/customTypes";
 
 export function useFilters(metaResponse?: MetaResponseType) {
-    const [gymSelected, setGymSelected] = useState("0");
-    const [classSelected, setClassSelected] = useState("0");
+    const [gymSelected, setGymSelected] = useState<string[]>([]);
+    const [classSelected, setClassSelected] = useState<string[]>([]);
+
     const [daySelected, setDaySelected] = useState("0");
     const [afterworkSelected, setAfterworkSelected] = useState(false);
 
