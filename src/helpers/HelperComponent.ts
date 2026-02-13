@@ -50,10 +50,10 @@ export async function getApi_meta(): Promise<MetaResponseType> {
 }
 
 export function getDdlItems(_value: string[], _label: string[], _noSorting?: boolean) {
-    var _itemListDDL: DropdownItems[] = [];
+    const _itemListDDL: DropdownItems[] = [];
 
     for (let index = 0; index < _value.length; index++) {
-        var _itemDDL: DropdownItems = {
+        const _itemDDL: DropdownItems = {
             label: _label[index],
             value: _value[index],
         };
