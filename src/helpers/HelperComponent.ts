@@ -9,10 +9,12 @@ export const API_FAVS_TOMORROW = API_URL + "/solinca/favs_tomorrow";
 export const API_FAVS_TOMORROW_NIGHT = API_URL + "/solinca/favs_tomorrow_night";
 export const API_META = API_URL + "/solinca/meta";
 
+const _auth = `Basic ${btoa(`${import.meta.env.VITE_API_USERNAME ?? ""}:${import.meta.env.VITE_API_PASSWORD ?? ""}`)}`;
+
 async function getApiData(_apiEndpoint: string) {
     let _output;
     try {
-        const response = await fetch(_apiEndpoint);
+        const response = await fetch(_apiEndpoint, { headers: { "Authorization": _auth } });
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
         }
